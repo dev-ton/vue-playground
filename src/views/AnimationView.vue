@@ -7,6 +7,7 @@
   /> -->
   <!-- <button class="btn" @click="triggerInput">Click</button> -->
   <FileUpload />
+  <AnimationGallery />
 </template>
 <script lang="ts" setup>
 import { ref } from 'vue'
@@ -14,6 +15,7 @@ import { ref } from 'vue'
 
 // import RiveAnimation from '@/components/RiveAnimation.vue'
 import FileUpload from '@/components/FileUpload.vue'
+import AnimationGallery from '@/components/AnimationGallery.vue'
 
 // const animation = ref<InstanceType<typeof RiveAnimation> | null>(null)
 

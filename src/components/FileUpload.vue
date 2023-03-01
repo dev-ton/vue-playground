@@ -31,7 +31,7 @@
   </div>
 </template>
 <script lang="ts" setup>
-import PocketBase from 'pocketbase'
+import pb from '@/api/pocketbase'
 import { ref, computed } from 'vue'
 import Fieldset from '@/components/Fieldset.vue'
 import Loader from '@/components/Loader.vue'
@@ -40,8 +40,6 @@ export interface Fields {
   fileInput: File | null
   textInput: string
 }
-
-const pb = new PocketBase('http://127.0.0.1:8090')
 
 const fields = ref<Fields[]>([{ fileInput: null, textInput: '' }])
 
