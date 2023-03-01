@@ -8,7 +8,9 @@
       :is="Fieldset"
       :index="index"
       @file-change="(f:File) => field.fileInput = f"
-      v-model="field.textInput"
+      @screenshot="(s:File) => field.screenshot = s"
+      v-model:title="field.textInput"
+      v-model:desc="field.descInput"
     >
       <button v-if="index > 0" type="button" @click="removeFieldset(index)">
         <FaIcon icon="fa-solid fa-trash" />
@@ -38,13 +40,27 @@ import Loader from '@/components/Loader.vue'
 
 export interface Fields {
   fileInput: File | null
+  screenshot: File | null
   textInput: string
+  descInput: string
 }
 
-const fields = ref<Fields[]>([{ fileInput: null, textInput: '' }])
+const fields = ref<Fields[]>([
+  {
+    fileInput: null,
+    textInput: '',
+    descInput: '',
+    screenshot: null,
+  },
+])
 
 const addFieldset = () => {
-  fields.value.push({ fileInput: null, textInput: '' })
+  fields.value.push({
+    fileInput: null,
+    textInput: '',
+    descInput: '',
+    screenshot: null,
+  })
 }
 
 const removeFieldset = (i: number) => {
@@ -52,7 +68,14 @@ const removeFieldset = (i: number) => {
 }
 
 const resetForm = () => {
-  fields.value = [{ fileInput: null, textInput: '' }]
+  fields.value = [
+    {
+      fileInput: null,
+      textInput: '',
+      descInput: '',
+      screenshot: null,
+    },
+  ]
 }
 
 const isLoading = ref<Boolean>(false)
@@ -74,8 +97,10 @@ const formData = new FormData()
 const handleSubmit = async () => {
   isLoading.value = true
   fields.value.forEach((f) => {
-    formData.append('statemachine', f.textInput)
+    formData.append('title', f.textInput)
+    formData.append('description', f.descInput)
     if (f.fileInput) formData.append('riv', f.fileInput)
+    if (f.screenshot) formData.append('screenshot', f.screenshot)
   })
   try {
     const record = await pb.collection('animations').create(formData)
@@ -92,3 +117,9 @@ const handleSubmit = async () => {
   }
 }
 </script>
+<style lang="scss" scoped>
+form {
+  width: 100%;
+  margin-bottom: 2rem;
+}
+</style>
