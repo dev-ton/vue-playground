@@ -1,27 +1,46 @@
 <template>
-  <!-- <RiveAnimation
-    ref="animation"
-    :src="animationUrl"
-    state-machine="State Machine 1"
-    style="width: 500px; height: 500px"
-  /> -->
   <!-- <button class="btn" @click="triggerInput">Click</button> -->
   <FileUpload />
   <AnimationGallery />
+  <Teleport to="#modal" v-if="visible">
+    <Modal>
+      <RiveAnimation
+        ref="animation"
+        :src="animationUrl"
+        state-machine="State Machine 1"
+        style="width: 500px; height: 500px"
+      />
+      <button @click="close">Close Modal</button>
+    </Modal>
+  </Teleport>
+  <button @click="show">Open Modal</button>
 </template>
 <script lang="ts" setup>
 import { ref } from 'vue'
-// import animationUrl from '@/animations/bubble.riv'
+import animationUrl from '@/animations/bubble.riv'
 
-// import RiveAnimation from '@/components/RiveAnimation.vue'
+import RiveAnimation from '@/components/RiveAnimation.vue'
 import FileUpload from '@/components/FileUpload.vue'
 import AnimationGallery from '@/components/AnimationGallery.vue'
+import { useModal } from '@/components/Modal.vue'
+import Modal from '@/components/Modal.vue'
 
 // const animation = ref<InstanceType<typeof RiveAnimation> | null>(null)
 
 // const triggerInput = () => {
 //   animation.value?.trigger()
 // }
+const modal = useModal()
+
+const show = () => {
+  modal.showModal()
+}
+
+const close = () => {
+  modal.hideModal()
+}
+
+const visible = ref(modal.visible)
 </script>
 <style scoped>
 .btn {
