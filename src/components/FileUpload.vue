@@ -93,7 +93,7 @@ const resetView = () => {
 
 const formData = new FormData()
 
-//TODO: right now it creates only one record, so I disabled the '+' button.
+//TODO: right now it creates only one record, so I disabled the '+' button. also add validation.
 const handleSubmit = async () => {
   isLoading.value = true
   fields.value.forEach((f) => {
