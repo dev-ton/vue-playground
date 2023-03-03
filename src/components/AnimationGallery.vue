@@ -2,6 +2,7 @@
   <Pagination :total-pages="totalPages" :current-page="1" :per-page="perPage"></Pagination>
 </template>
 <script setup lang="ts">
+// TODO: I might use scoped slots in pagination to create items
 import { onMounted, ref, computed } from 'vue'
 import Pagination from '@/components/Pagination.vue'
 import pb from '@/api/pocketbase'

@@ -4,7 +4,12 @@
       <div class="overlay">
         <div>
           <div class="dialog" role="dialog" aria-modal="true">
-            <slot />
+            <div class="top-panel">
+              <FaIcon class="close" icon="fa-solid fa-xmark" @click="modal.hideModal" />
+            </div>
+            <div class="content">
+              <slot />
+            </div>
           </div>
         </div>
       </div>
@@ -12,13 +17,19 @@
   </Teleport>
 </template>
 <script lang="ts">
-import { defineComponent, ref, computed } from 'vue'
-const show = ref(false)
+import { computed, ref } from 'vue'
+// TODO:
+// - separate on normal ts and setup.
+// - add async component load and suspense
+// - i tried to defineExpose instead export useModal but it didn't work
+
 interface ModalApi {
   hideModal: () => void
   showModal: () => void
   visible: boolean
 }
+const show = ref<boolean>(false)
+
 export const useModal = (): ModalApi => {
   return new Proxy<ModalApi>(Object.create(null), {
     get(obj, prop) {
@@ -34,20 +45,9 @@ export const useModal = (): ModalApi => {
     },
   })
 }
-export default defineComponent({
-  setup() {
-    const modal = useModal()
-    const style = computed(() => {
-      return {
-        display: show.value ? 'block' : 'none',
-      }
-    })
-    return {
-      style,
-      hide: modal.hideModal,
-    }
-  },
-})
+</script>
+<script lang="ts" setup>
+const modal = useModal()
 </script>
 <style lang="scss" scoped>
 .overlay {
@@ -55,6 +55,7 @@ export default defineComponent({
   inset: 0;
   overflow-y: auto;
   background-color: rgba(0, 0, 0, 0.501);
+  z-index: 101;
   & > div {
     display: flex;
     align-items: center;
@@ -69,19 +70,35 @@ export default defineComponent({
   border-radius: 24px;
   text-align: center;
   box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-  padding: 1rem;
 
-  & > .actions {
+  & > .top-panel {
+    background-color: #423e3e;
+    color: rgb(28, 28, 28);
     display: flex;
-    justify-content: center;
-    padding: 1rem 0;
-    color: #fff;
+    justify-content: end;
+    padding: 1rem 2rem;
+    width: 100%;
+    border-radius: 24px 24px 0 0;
+
+    & > .close {
+      cursor: pointer;
+      transition: color ease-in-out 0.3s;
+      width: 24px;
+      height: 24px;
+
+      &:hover {
+        color: #fff;
+      }
+    }
+  }
+
+  & > .content {
+    padding: 1rem;
+    width: 100%;
   }
 }
-.btn.secondary {
-  border: 1px solid #000;
-  background: #fff;
-  color: #000;
-  margin-right: 1rem;
+.animation-mode {
+  width: 500px;
+  height: 500px;
 }
 </style>
