@@ -17,7 +17,7 @@
     </div>
     <div class="form-control">
       <label :for="'title' + index">Title:</label>
-      <input type="text" :id="'title' + index" :value="title" @input="updateModelValue" />
+      <input type="text" :id="'title' + index" :value="title" @input="updateTitleValue" />
     </div>
     <div class="form-control">
       <label :for="'desc' + index">Description:</label>
@@ -59,7 +59,7 @@ function handleScreenshotInputChange(e: Event) {
   }
 }
 
-const updateModelValue = (event: Event) => {
+const updateTitleValue = (event: Event) => {
   const target = event.target as HTMLInputElement
   if (target) emit('update:title', target.value)
 }

@@ -32,8 +32,6 @@
 import { computed, ref, defineAsyncComponent } from 'vue'
 import Loader from '@/components/Loader.vue'
 // TODO:
-// - separate on normal ts and setup.
-// - add async component load and suspense
 // - i tried to defineExpose instead export useModal but it didn't work
 
 interface ModalApi {
@@ -64,7 +62,7 @@ const props = defineProps<{
   component: string
   contentProps: object
 }>()
-
+// TODO: instead having the component and its props like this, I can incorporate them in useModal
 const modalContent = defineAsyncComponent(() => import(/* @vite-ignore */ `@/components/${props.component}.vue`))
 
 const modal = useModal()

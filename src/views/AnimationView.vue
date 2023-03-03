@@ -3,12 +3,7 @@
   <FileUpload />
   <AnimationGallery />
   <Modal v-if="visible">
-    <RiveAnimation
-      ref="animation"
-      :src="animationUrl"
-      state-machine="State Machine 1"
-      style="width: 500px; height: 500px"
-    />
+    <RiveAnimation ref="animation" :src="animationUrl" state-machine="State Machine 1" />
   </Modal>
   <button @click="show">Open Modal</button>
 </template>

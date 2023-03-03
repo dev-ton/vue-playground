@@ -19,9 +19,10 @@
 <script lang="ts">
 import { computed, ref } from 'vue'
 // TODO:
-// - separate on normal ts and setup.
-// - add async component load and suspense
 // - i tried to defineExpose instead export useModal but it didn't work
+// - consider using <dialog></dialog>
+// - add transitions
+// - add clickoutside
 
 interface ModalApi {
   hideModal: () => void
