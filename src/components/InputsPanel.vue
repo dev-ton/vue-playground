@@ -1,13 +1,14 @@
 <template>
-  <ul>
-    <li v-if="!inputs">Loading ...</li>
-    <li v-for="(input, index) in inputs" :key="input.name + index" @click="fireInput(index)">
-      {{ input.name }}
-    </li>
-  </ul>
+  <Transition name="panel" appear>
+    <ul>
+      <li v-if="!inputs">Loading ...</li>
+      <li v-for="(input, index) in inputs" :key="input.name + index" @click="fireInput(index)">
+        {{ input.name }}
+      </li>
+    </ul>
+  </Transition>
 </template>
 <script lang="ts" setup>
-//TODO: Add transition to inputpanel
 import type { StateMachineInput } from '@rive-app/canvas'
 const props = defineProps<{
   inputs: StateMachineInput[]
@@ -42,5 +43,19 @@ ul {
       background-color: rgb(41, 41, 41);
     }
   }
+}
+.panel-enter-from,
+.panel-fade-leave-to {
+  opacity: 0;
+}
+
+.panel-enter-active,
+.panel-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.panel-enter-to,
+.panel-leave-from {
+  opacity: 1;
 }
 </style>

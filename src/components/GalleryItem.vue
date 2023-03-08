@@ -1,21 +1,26 @@
 <template>
   <div class="item">
-    <img :src="props.screenshotUrl" class="screenshot" alt="" />
+    <!-- <img :src="getUrl(animation.collectionId, animation.id, animation.screenshot)" class="screenshot" alt="" /> -->
     <div class="content">
-      <h2>{{ title }}</h2>
-      <p v-if="description">{{ description }}</p>
+      <h2>{{ animation.title }}</h2>
+      <p>{{ animation.description }}</p>
     </div>
   </div>
 </template>
 <script lang="ts" setup>
-export interface Props {
-  screenshotUrl?: string | ''
-  rivFileUrl: string
-  title: string
-  description?: string | ''
+// import { computed } from 'vue'
+import type { Animations } from '@/views/AnimationView.vue'
+import { onMounted } from 'vue'
+const props = defineProps<{
+  animation: Animations
+}>()
+//TODO: computed for urls, open modal
+const getUrl = (collectionId: string, assetId: string, filename: string) => {
+  // return new URL(`../../pb_data/storage/${collectionId}/${assetId}/${filename}`, import.meta.url).href
+  console.log(`../../pb_data/storage/${collectionId}/${assetId}/${filename}`)
 }
-const props = withDefaults(defineProps<Props>(), {
-  screenshotUrl: '@/assets/screenshot.png',
+onMounted(() => {
+  getUrl(props.animation.collectionId, props.animation.id, props.animation.screenshot)
 })
 </script>
 <style lang="scss" scoped>

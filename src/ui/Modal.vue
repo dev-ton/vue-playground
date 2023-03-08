@@ -1,11 +1,11 @@
 <template>
   <Teleport to="#modal">
-    <Transition>
-      <div class="overlay">
+    <Transition name="modal">
+      <div class="overlay" v-if="props.visible">
         <div>
-          <div class="dialog" role="dialog" aria-modal="true">
+          <div ref="target" class="dialog" role="dialog" aria-modal="true">
             <div class="top-panel">
-              <FaIcon class="close" icon="fa-solid fa-xmark" @click="modal.hideModal" />
+              <FaIcon class="close" icon="fa-solid fa-xmark" @click="close" />
             </div>
             <div class="content">
               <slot />
@@ -18,17 +18,16 @@
 </template>
 <script lang="ts">
 import { computed, ref } from 'vue'
+import { onClickOutside } from '@vueuse/core'
 // TODO:
 // - i tried to defineExpose instead export useModal but it didn't work
-// - consider using <dialog></dialog>
-// - add transitions
-// - add clickoutside
 
 interface ModalApi {
   hideModal: () => void
   showModal: () => void
   visible: boolean
 }
+
 const show = ref<boolean>(false)
 
 export const useModal = (): ModalApi => {
@@ -48,14 +47,28 @@ export const useModal = (): ModalApi => {
 }
 </script>
 <script lang="ts" setup>
-const modal = useModal()
+const props = defineProps<{
+  visible: boolean
+}>()
+
+const emit = defineEmits<{
+  (e: 'close'): void
+}>()
+
+const close = () => {
+  emit('close')
+}
+
+const target = ref(null)
+
+onClickOutside(target, (event) => close())
 </script>
 <style lang="scss" scoped>
 .overlay {
   position: fixed;
   inset: 0;
   overflow-y: auto;
-  background-color: rgba(0, 0, 0, 0.501);
+  background-color: rgba(0, 0, 0, 0.75);
   z-index: 101;
   & > div {
     display: flex;
@@ -101,5 +114,24 @@ const modal = useModal()
 .animation-mode {
   width: 500px;
   height: 500px;
+}
+
+.modal-enter-from,
+.modal-leave-to {
+  opacity: 0;
+}
+
+.modal-enter-active,
+.modal-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.modal-enter-to,
+.modal-leave-from {
+  opacity: 1;
+}
+
+.fade-out {
+  opacity: 0;
 }
 </style>

@@ -46,9 +46,9 @@ onMounted(() => {
           inputs.push(input)
         })
       }
+      r.resizeDrawingSurfaceToCanvas()
     },
   })
-  r.resizeDrawingSurfaceToCanvas()
   riveRef.value = r
   isLoading.value = false
 })

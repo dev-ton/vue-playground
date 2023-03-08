@@ -37,7 +37,7 @@
 import { computed } from 'vue'
 export interface Props {
   maxVisibleButtons?: number
-  totalPages: number
+  totalPages: number | undefined
   perPage: number
   currentPage: number
 }
