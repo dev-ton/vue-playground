@@ -22,7 +22,6 @@
       <i-form-label :for="'desc' + index">Description:</i-form-label>
       <i-input :id="'desc' + index" name="desc" rows="4" cols="26" :value="desc" v-model="descValue" />
     </i-form-group>
-    <!-- TODO: input fields requirs vmodel in order to be editable, solve with writeable computeds? -->
     <slot></slot>
   </i-form-group>
 </template>
@@ -77,34 +76,7 @@ const handleScreenshotInputChange = (e: Event) => {
     emit('screenshot', file)
   }
 }
-
-// const updateTitleValue = (event: Event) => {
-//   const target = event.target as HTMLInputElement
-//   if (target) emit('update:title', target.value)
-// }
-
-// const updateDescValue = (event: Event) => {
-//   const target = event.target as HTMLInputElement
-//   if (target) emit('update:desc', target.value)
-// }
 </script>
 <style lang="scss" scoped>
 /*TODO: Add responsivity */
-fieldset {
-  width: 100%;
-  padding: 1rem;
-  margin: 0.75rem 0;
-  border-color: rgb(37, 37, 37);
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-
-  & > .form-control {
-    padding: 0 0.5rem;
-    width: 25%;
-    flex: 1 1 25%;
-    display: flex;
-    flex-direction: column;
-  }
-}
 </style>
