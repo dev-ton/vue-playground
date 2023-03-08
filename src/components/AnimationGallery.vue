@@ -37,7 +37,7 @@ const totalPages = computed(() => {
 })
 
 const getUrl = (collectionId: string, recordId: string, filename: string) => {
-  return new URL(`../../pb_data/storage/${collectionId}/${recordId}/${filename}`, import.meta.url).href
+  return new URL(`../../db/pb_data/storage/${collectionId}/${recordId}/${filename}`, import.meta.url).href
 }
 
 const rivUrl = ref('')
