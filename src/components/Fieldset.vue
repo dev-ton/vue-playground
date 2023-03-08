@@ -16,19 +16,11 @@
     </i-form-group>
     <i-form-group inline>
       <i-form-label :for="'title' + index">Title:</i-form-label>
-      <i-input type="text" :id="'title' + index" :value="title" @input="updateTitleValue" />
+      <i-input type="text" :id="'title' + index" :value="title" v-model="titleValue" />
     </i-form-group>
     <i-form-group inline>
       <i-form-label :for="'desc' + index">Description:</i-form-label>
-      <i-input
-        :id="'desc' + index"
-        name="desc"
-        rows="4"
-        cols="26"
-        :value="desc"
-        v-model="modelValue"
-        @input="updateDescValue"
-      />
+      <i-input :id="'desc' + index" name="desc" rows="4" cols="26" :value="desc" v-model="descValue" />
     </i-form-group>
     <!-- TODO: input fields requirs vmodel in order to be editable, solve with writeable computeds? -->
     <slot></slot>
@@ -36,6 +28,7 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue'
 const props = defineProps<{
   index: number
   title: String
@@ -43,11 +36,29 @@ const props = defineProps<{
 }>()
 
 const emit = defineEmits<{
-  (e: 'fileChange', files: File): void
-  (e: 'screenshot', files: File): void
-  (e: 'update:title', value: string): void
-  (e: 'update:desc', value: string): void
+  (e: 'fileChange', file: File): void
+  (e: 'screenshot', file: File): void
+  (e: 'update:title', value: String): void
+  (e: 'update:desc', value: String): void
 }>()
+
+const titleValue = computed({
+  get() {
+    return props.title
+  },
+  set(titleValue) {
+    emit('update:title', titleValue)
+  },
+})
+
+const descValue = computed({
+  get() {
+    return props.desc
+  },
+  set(descValue) {
+    emit('update:desc', descValue)
+  },
+})
 
 //TODO: can both files be sent in one emit? I think so.
 
@@ -67,15 +78,15 @@ const handleScreenshotInputChange = (e: Event) => {
   }
 }
 
-const updateTitleValue = (event: Event) => {
-  const target = event.target as HTMLInputElement
-  if (target) emit('update:title', target.value)
-}
+// const updateTitleValue = (event: Event) => {
+//   const target = event.target as HTMLInputElement
+//   if (target) emit('update:title', target.value)
+// }
 
-const updateDescValue = (event: Event) => {
-  const target = event.target as HTMLInputElement
-  if (target) emit('update:desc', target.value)
-}
+// const updateDescValue = (event: Event) => {
+//   const target = event.target as HTMLInputElement
+//   if (target) emit('update:desc', target.value)
+// }
 </script>
 <style lang="scss" scoped>
 /*TODO: Add responsivity */

@@ -3,7 +3,7 @@
     <Loader v-if="!inputs" color="primary" />
     <i-sidebar v-else placement="right">
       <i-nav vertical>
-        <i-nav-item v-for="(input, index) in inputs" :key="input.name + index" @click="fireInput(index)">
+        <i-nav-item v-for="(input, index) in inputs" :key="input.name + index" @click="fireInput(index)" class="item">
           {{ input.name }}
         </i-nav-item>
       </i-nav>
@@ -27,6 +27,9 @@ const fireInput = (index: number) => {
 console.log(props.inputs)
 </script>
 <style lang="scss" scoped>
+.item {
+  cursor: pointer;
+}
 .panel-enter-from,
 .panel-fade-leave-to {
   opacity: 0;
