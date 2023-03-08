@@ -1,13 +1,19 @@
 <template>
-  <Loader v-if="isLoading" />
-  <div v-show="!isLoading" class="container">
-    <div>
-      <canvas ref="canvasRef" style="width: 500px; height: 500px"></canvas>
-    </div>
-    <div>
-      <InputsPanel :key="componentKey" :inputs="inputs" @fireInput="(i) => inputs[i].fire()" />
-    </div>
-  </div>
+  <i-layout vertical class="_padding-top:1/2">
+    <i-layout-content>
+      <i-container>
+        <i-row>
+          <i-column>
+            <Loader v-if="isLoading" color="primary" />
+            <div v-show="!isLoading">
+              <canvas ref="canvasRef" style="width: 500px; height: 500px"></canvas>
+            </div>
+          </i-column>
+        </i-row>
+      </i-container>
+    </i-layout-content>
+    <InputsPanel :key="componentKey" :inputs="inputs" @fireInput="(i) => inputs[i].fire()" />
+  </i-layout>
 </template>
 <script lang="ts" setup>
 import { ref, onMounted } from 'vue'
@@ -61,17 +67,3 @@ setTimeout(() => {
   forceRerender()
 }, 200)
 </script>
-<style lang="scss" scoped>
-.container {
-  min-width: 1024px;
-  display: flex;
-  & > div:first-child {
-    width: 85%;
-  }
-  & > div:nth-child(2) {
-    width: 15%;
-    align-self: stretch;
-    background-color: dimgray;
-  }
-}
-</style>

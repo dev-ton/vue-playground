@@ -1,11 +1,13 @@
 <template>
   <Transition name="panel" appear>
-    <ul>
-      <li v-if="!inputs">Loading ...</li>
-      <li v-for="(input, index) in inputs" :key="input.name + index" @click="fireInput(index)">
-        {{ input.name }}
-      </li>
-    </ul>
+    <Loader v-if="!inputs" color="primary" />
+    <i-sidebar v-else placement="right">
+      <i-nav vertical>
+        <i-nav-item v-for="(input, index) in inputs" :key="input.name + index" @click="fireInput(index)">
+          {{ input.name }}
+        </i-nav-item>
+      </i-nav>
+    </i-sidebar>
   </Transition>
 </template>
 <script lang="ts" setup>
@@ -25,21 +27,6 @@ const fireInput = (index: number) => {
 console.log(props.inputs)
 </script>
 <style lang="scss" scoped>
-ul {
-  list-style: none;
-  text-align: center;
-  padding: 0;
-  & > li {
-    background-color: rgb(27, 27, 27);
-    padding: 1rem 2rem;
-    color: rgb(82, 82, 82);
-    cursor: pointer;
-    &:hover {
-      color: rgb(180, 180, 180);
-      background-color: rgb(41, 41, 41);
-    }
-  }
-}
 .panel-enter-from,
 .panel-fade-leave-to {
   opacity: 0;
@@ -48,6 +35,7 @@ ul {
 .panel-enter-active,
 .panel-leave-active {
   transition: opacity 0.5s ease;
+  transition-delay: 200ms;
 }
 
 .panel-enter-to,

@@ -1,6 +1,11 @@
 <template>
-  <form v-if="!formShow" @submit.prevent="handleSubmit">
-    <button type="button" @click="addFieldset" disabled>+</button>
+  <i-form v-if="!formShow" @submit.prevent="handleSubmit">
+    <i-row>
+      <i-column>
+        <i-button circle @click="addFieldset" disabled>+</i-button>
+        <h3>Rive Animation {{ fields.length }}</h3>
+      </i-column>
+    </i-row>
     <!--TODO: dynamic component is not really needed here, since we use only Fieldset component. But I might be adding also different components in the future. Also I could consider making the custom component as a new component.-->
     <component
       v-for="(field, index) in fields"
@@ -12,24 +17,26 @@
       v-model:title="field.textInput"
       v-model:desc="field.descInput"
     >
-      <button v-if="index > 0" type="button" @click="removeFieldset(index)">
+      <i-button v-if="index > 0" circle type="button" @click="removeFieldset(index)">
         <FaIcon icon="fa-solid fa-trash" />
-      </button>
+      </i-button>
     </component>
-    <input type="submit" value="Upload!" />
-    <input type="reset" @click.prevent="resetForm" />
-  </form>
+    <i-form-group inline>
+      <i-input type="submit" value="Upload!" />
+      <i-input type="reset" @click.prevent="resetForm" />
+    </i-form-group>
+  </i-form>
   <Loader v-if="isLoading" />
   <div v-if="sent">
     <p>File was uploaded succesfully!</p>
     <div>
-      <button @click="resetView">Upload another one</button>
-      <button>Go to animation gallery</button>
+      <i-button @click="resetView">Upload another one</i-button>
+      <i-button>Go to animation gallery</i-button>
     </div>
   </div>
   <div v-if="errorMessage">
     <p>{{ errorMessage }}</p>
-    <button @click="resetView">Try again</button>
+    <i-button @click="resetView">Try again</i-button>
   </div>
 </template>
 <script lang="ts" setup>

@@ -9,13 +9,13 @@
     />
   </div>
 
-  <Pagination :total-pages="totalPages" :current-page="1" :per-page="perPage"></Pagination>
+  <Pagination :items-total="props.animations?.length" :per-page="perPage"></Pagination>
   <Modal :visible="visible" @close="close">
     <RiveAnimation ref="animationRef" :src="rivUrl" state-machine="State Machine 1" />
   </Modal>
 </template>
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
 import type { Animations } from '@/views/AnimationView.vue'
 import GalleryItem from '@/components/GalleryItem.vue'
 import Pagination from '@/components/Pagination.vue'
@@ -28,13 +28,6 @@ const props = defineProps<{
 }>()
 
 const perPage = ref<number>(9)
-const totalPages = computed(() => {
-  if (props.animations) {
-    return Math.ceil(props.animations.length / perPage.value)
-  } else {
-    return undefined
-  }
-})
 
 const getUrl = (collectionId: string, recordId: string, filename: string) => {
   return new URL(`../../db/pb_data/storage/${collectionId}/${recordId}/${filename}`, import.meta.url).href

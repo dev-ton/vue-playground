@@ -1,8 +1,9 @@
 <template>
   <Navigation />
-  <main id="content">
+  <i-layout-content class="main">
     <RouterView />
-  </main>
+  </i-layout-content>
+  <i-layout-footer> </i-layout-footer>
 </template>
 
 <script setup lang="ts">
@@ -11,22 +12,13 @@ import Navigation from '@/components/Navigation.vue'
 </script>
 
 <style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
+.main {
+  padding-top: 60px;
 }
 
 @media (min-width: 1024px) {
-  .homeHeader {
-    display: flex;
-    place-items: flex-start;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .homeHeader .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
+  .main {
+    padding-top: 100px;
   }
 }
 </style>

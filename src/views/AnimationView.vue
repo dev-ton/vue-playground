@@ -1,5 +1,7 @@
 <template>
-  <FileUpload />
+  <CollapsibleSingle title="Upload new animation(s)">
+    <FileUpload />
+  </CollapsibleSingle>
   <Loader v-if="isLoading" />
   <AnimationGallery v-else :animations="animations" />
 </template>
@@ -9,6 +11,7 @@ import pb from '@/api/pocketbase'
 import type { Record } from 'pocketbase'
 
 import Loader from '@/components/Loader.vue'
+import CollapsibleSingle from '@/ui/CollapsibleSingle.vue'
 import FileUpload from '@/components/FileUpload.vue'
 import AnimationGallery from '@/components/AnimationGallery.vue'
 
