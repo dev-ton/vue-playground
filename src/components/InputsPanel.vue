@@ -28,10 +28,6 @@ console.log(props.inputs)
 ul {
   list-style: none;
   text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 1rem;
   padding: 0;
   & > li {
     background-color: rgb(27, 27, 27);
@@ -39,7 +35,7 @@ ul {
     color: rgb(82, 82, 82);
     cursor: pointer;
     &:hover {
-      color: rgb(14, 14, 14);
+      color: rgb(180, 180, 180);
       background-color: rgb(41, 41, 41);
     }
   }

@@ -2,22 +2,15 @@
   <FileUpload />
   <Loader v-if="isLoading" />
   <AnimationGallery v-else :animations="animations" />
-  <Modal :visible="visible" @close="close">
-    <RiveAnimation ref="animation" :src="animationUrl" state-machine="State Machine 1" />
-  </Modal>
-  <button @click="show" style="cursor: pointer">Open Modal</button>
 </template>
 <script lang="ts" setup>
 import { ref, onBeforeMount } from 'vue'
 import pb from '@/api/pocketbase'
 import type { Record } from 'pocketbase'
-import animationUrl from '@/animations/bubble.riv'
 
 import Loader from '@/components/Loader.vue'
-import RiveAnimation from '@/components/RiveAnimation.vue'
 import FileUpload from '@/components/FileUpload.vue'
 import AnimationGallery from '@/components/AnimationGallery.vue'
-import Modal, { useModal } from '@/ui/Modal.vue'
 
 export interface Animations extends Record {
   riv: string
@@ -25,15 +18,6 @@ export interface Animations extends Record {
   description: string
   screenshot: string
 }
-
-const modal = useModal()
-const show = () => {
-  modal.showModal()
-}
-const close = () => {
-  modal.hideModal()
-}
-const visible = ref(modal.visible)
 
 const isLoading = ref<Boolean>(false)
 
