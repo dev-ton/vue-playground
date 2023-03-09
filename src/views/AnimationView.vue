@@ -1,8 +1,8 @@
 <template>
-  <CollapsibleSingle title="Upload new animation(s)">
-    <FileUpload />
+  <CollapsibleSingle v-model:is-open="isOpen" title="Upload new animation(s)">
+    <FileUpload @collapse="collapseToggle" />
   </CollapsibleSingle>
-  <Loader v-if="isLoading" />
+  <Loader v-if="isLoading" color="primary" />
   <AnimationGallery v-else :animations="animations" />
 </template>
 <script lang="ts" setup>
@@ -20,6 +20,12 @@ export interface Animations extends Record {
   title: string
   description: string
   screenshot: string
+}
+
+// by default non-existent item, so collapsible is closed. Click on close button then supply empty string, which will close it again.
+const isOpen = ref<string[]>(['collapsible-item-2'])
+const collapseToggle = () => {
+  isOpen.value = ['']
 }
 
 const isLoading = ref<Boolean>(false)

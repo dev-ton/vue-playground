@@ -11,6 +11,7 @@
   </Transition>
 </template>
 <script lang="ts" setup>
+import Loader from '@/components/Loader.vue'
 import type { StateMachineInput } from '@rive-app/canvas'
 const props = defineProps<{
   inputs: StateMachineInput[]
