@@ -1,9 +1,23 @@
 <template>
-  <CollapsibleSingle v-model:is-open="isOpen" title="Upload new animation(s)">
-    <FileUpload @collapse="collapseToggle" />
-  </CollapsibleSingle>
-  <Loader v-if="isLoading" color="primary" />
-  <AnimationGallery v-else :animations="animations" />
+  <i-container>
+    <i-row>
+      <i-column>
+        <CollapsibleSingle v-model:is-open="isOpen" title="Upload new animation(s)">
+          <FileUpload @collapse="collapseToggle" />
+        </CollapsibleSingle>
+      </i-column>
+    </i-row>
+    <i-row v-if="isLoading">
+      <i-column>
+        <Loader color="primary" />
+      </i-column>
+    </i-row>
+    <i-row v-else>
+      <i-column>
+        <AnimationGallery :animations="animations" />
+      </i-column>
+    </i-row>
+  </i-container>
 </template>
 <script lang="ts" setup>
 import { ref, onBeforeMount } from 'vue'
