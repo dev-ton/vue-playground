@@ -1,17 +1,20 @@
 <template>
   <Transition name="panel" appear>
-    <Loader v-if="!inputs" color="primary" />
-    <i-sidebar v-else placement="right">
+    <i-sidebar placement="right" :class="['sidebar', { active: inputs.length > 0 }]">
       <i-nav vertical>
-        <i-nav-item v-for="(input, index) in inputs" :key="input.name + index" @click="fireInput(index)" class="item">
-          {{ input.name }}
-        </i-nav-item>
+        <div v-if="inputs.length === 0">
+          <p>No inputs found</p>
+        </div>
+        <template v-else>
+          <i-nav-item v-for="(input, index) in inputs" :key="input.name + index" @click="fireInput(index)" class="item">
+            {{ input.name }}
+          </i-nav-item>
+        </template>
       </i-nav>
     </i-sidebar>
   </Transition>
 </template>
 <script lang="ts" setup>
-import Loader from '@/components/Loader.vue'
 import type { StateMachineInput } from '@rive-app/canvas'
 const props = defineProps<{
   inputs: StateMachineInput[]
@@ -31,6 +34,13 @@ console.log(props.inputs)
 .item {
   cursor: pointer;
 }
+.sidebar {
+  opacity: 0.3;
+  transition: opacity ease 0.5s;
+}
+.active {
+  opacity: 1;
+}
 .panel-enter-from,
 .panel-fade-leave-to {
   opacity: 0;
@@ -44,6 +54,6 @@ console.log(props.inputs)
 
 .panel-enter-to,
 .panel-leave-from {
-  opacity: 1;
+  opacity: 0.3;
 }
 </style>
