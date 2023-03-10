@@ -1,56 +1,62 @@
 <template>
-  <i-form v-if="!formShow" @submit.prevent="handleSubmit">
+  <i-container>
     <i-row>
       <i-column>
-        <i-button type="button" circle @click="addFieldset">+</i-button>
-        <h3>Rive Animation {{ fields.length }}</h3>
+        <i-form v-if="!formShow" @submit.prevent="handleSubmit">
+          <i-button type="button" circle @click="addFieldset">+</i-button>
+          <!--TODO: dynamic component is not really needed here, since we use only Fieldset component. But I might be adding also different components in the future. Also I could consider making the custom component as a new component.-->
+          <component
+            v-for="(field, index) in fields"
+            :key="index"
+            :is="Fieldset"
+            :index="index"
+            @file-change="(f:File) => field.fileInput = f"
+            @screenshot="(s:File) => field.screenshot = s"
+            v-model:title="field.textInput"
+            v-model:desc="field.descInput"
+          >
+            <i-button v-if="index > 0" circle type="button" @click="removeFieldset(index)">
+              <FaIcon icon="fa-solid fa-trash" />
+            </i-button>
+          </component>
+          <i-form-group inline class="_margin-top:1 submitBtns">
+            <i-input type="submit" value="Upload!" />
+            <i-input type="reset" @click.prevent="resetForm" />
+          </i-form-group>
+        </i-form>
+
+        <Loader v-if="isLoading" color="primary" />
+        <div v-if="sent">
+          <i-alert color="success">
+            <template #icon>
+              <i-icon name="ink-check" />
+            </template>
+            <p v-if="createdRecords < 2">File was succesfully uploaded!</p>
+            <p v-else>{{ createdRecords }} files were succesfully uploaded!</p>
+          </i-alert>
+        </div>
+        <div v-if="errorMessage">
+          <i-alert color="warning">
+            <template #icon>
+              <i-icon name="ink-warning" />
+            </template>
+            <p v-if="failedRecords < 2">File upload failed!</p>
+            <p v-else>{{ failedRecords }} files were not uploaded!</p>
+            <p>{{ errorMessage }}</p>
+          </i-alert>
+        </div>
       </i-column>
     </i-row>
-    <!--TODO: dynamic component is not really needed here, since we use only Fieldset component. But I might be adding also different components in the future. Also I could consider making the custom component as a new component.-->
-    <component
-      v-for="(field, index) in fields"
-      :key="index"
-      :is="Fieldset"
-      :index="index"
-      @file-change="(f:File) => field.fileInput = f"
-      @screenshot="(s:File) => field.screenshot = s"
-      v-model:title="field.textInput"
-      v-model:desc="field.descInput"
+    <i-row center class="_margin-top:1">
+      <i-column>
+        <div v-if="sent || errorMessage">
+          <i-button v-if="errorMessage" @click="resetView">Try again</i-button>
+          <i-button v-else @click="resetView">Upload more</i-button>
+          <i-button @click="closeCollapsible">Close</i-button>
+        </div>
+      </i-column></i-row
     >
-      <i-button v-if="index > 0" circle type="button" @click="removeFieldset(index)">
-        <FaIcon icon="fa-solid fa-trash" />
-      </i-button>
-    </component>
-    <i-form-group inline>
-      <i-input type="submit" value="Upload!" />
-      <i-input type="reset" @click.prevent="resetForm" />
-    </i-form-group>
-  </i-form>
-  <Loader v-if="isLoading" color="primary" />
-  <div v-if="sent">
-    <i-alert color="success">
-      <template #icon>
-        <i-icon name="ink-check" />
-      </template>
-      <p v-if="createdRecords < 2">File was succesfully uploaded!</p>
-      <p v-else>{{ createdRecords }} files were succesfully uploaded!</p>
-    </i-alert>
-  </div>
-  <div v-if="errorMessage">
-    <i-alert color="warning">
-      <template #icon>
-        <i-icon name="ink-warning" />
-      </template>
-      <p v-if="failedRecords < 2">File was succesfully uploaded!</p>
-      <p v-else>{{ failedRecords }} files were succesfully uploaded!</p>
-      <p>{{ errorMessage }}</p>
-    </i-alert>
-  </div>
-  <div v-if="sent || errorMessage">
-    <i-button v-if="errorMessage" @click="resetView">Try again</i-button>
-    <i-button v-else @click="resetView">Upload more</i-button>
-    <i-button @click="closeCollapsible">Close</i-button>
-  </div>
+  </i-container>
 </template>
 <script lang="ts" setup>
 import { ref, computed } from 'vue'
@@ -150,5 +156,13 @@ const handleSubmit = async () => {
 form {
   width: 100%;
   margin-bottom: 2rem;
+}
+.submitBtns {
+  & > * {
+    margin-right: 1rem;
+  }
+  & .input-wrapper .input > input {
+    cursor: pointer;
+  }
 }
 </style>
