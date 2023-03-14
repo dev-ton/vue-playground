@@ -6,3 +6,7 @@
     --color--primary--s: 77%;
     --color--primary--l: 39%;
 }
+
+@include i-pagination() {
+    ----opacity--disabled: 0.2;
+}

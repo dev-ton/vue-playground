@@ -1,6 +1,6 @@
 <template>
   <i-collapsible v-model="open">
-    <i-collapsible-item name="collapsible-item-1" :title="title">
+    <i-collapsible-item name="collapsible-item-1" :title="title" class="custom">
       <slot />
     </i-collapsible-item>
   </i-collapsible>

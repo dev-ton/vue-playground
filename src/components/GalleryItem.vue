@@ -13,7 +13,6 @@ const props = defineProps<{
   animation: Animations
   source: string
 }>()
-//TODO: this get Url can be made as hook
 </script>
 <style lang="scss" scoped>
 .item {
