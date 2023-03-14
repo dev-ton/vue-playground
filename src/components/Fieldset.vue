@@ -25,7 +25,7 @@
         </i-form-group>
         <i-form-group>
           <i-form-label :for="'desc' + index">Description:</i-form-label>
-          <i-input :id="'desc' + index" name="desc" rows="4" cols="26" :value="desc" v-model="descValue" />
+          <i-input :id="'desc' + index" name="desc" :value="desc" v-model="descValue" />
         </i-form-group>
       </i-form-group>
       <slot></slot>

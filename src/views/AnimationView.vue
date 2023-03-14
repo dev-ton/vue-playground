@@ -7,12 +7,12 @@
         </CollapsibleSingle>
       </i-column>
     </i-row>
-    <i-row v-if="isLoading">
+    <i-row v-if="isLoading" class="spacing">
       <i-column>
         <Loader color="primary" />
       </i-column>
     </i-row>
-    <i-row v-else>
+    <i-row v-else class="spacing">
       <i-column>
         <AnimationGallery :animations="animations" />
       </i-column>
@@ -85,5 +85,8 @@ onBeforeMount(() => {
 .btn:hover {
   background-color: hsla(160, 100%, 57%, 1);
   color: hsla(160, 100%, 27%, 1);
+}
+.spacing {
+  margin-top: var(--margin-top);
 }
 </style>

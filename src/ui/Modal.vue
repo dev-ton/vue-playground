@@ -5,6 +5,7 @@
         <div>
           <div ref="target" class="dialog" role="dialog" aria-modal="true">
             <div class="top-panel">
+              <h2>{{ title }}</h2>
               <FaIcon class="close" icon="fa-solid fa-xmark" @click="close" />
             </div>
             <div class="content">
@@ -49,6 +50,7 @@ export const useModal = (): ModalApi => {
 <script lang="ts" setup>
 const props = defineProps<{
   visible: boolean
+  title?: string
 }>()
 
 const emit = defineEmits<{
@@ -89,10 +91,11 @@ onClickOutside(target, (event) => close())
     background-color: #423e3e;
     color: rgb(28, 28, 28);
     display: flex;
-    justify-content: end;
+    justify-content: space-between;
     padding: 1rem 2rem;
     width: 100%;
     border-radius: 24px 24px 0 0;
+    align-items: center;
 
     & > .close {
       cursor: pointer;
@@ -103,6 +106,12 @@ onClickOutside(target, (event) => close())
       &:hover {
         color: #fff;
       }
+    }
+
+    & > h2 {
+      margin-top: 0;
+      margin-bottom: 0;
+      color: #fff;
     }
   }
 

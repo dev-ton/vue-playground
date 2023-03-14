@@ -1,19 +1,20 @@
 <template>
   <Pagination :items-total="props.animations?.length" :per-page="perPage" v-model:current-page="currentPage" />
-  <div class="grid">
+  <div class="grid" :style="{ '--total': paginatedAnimations?.length }">
     <!--TODO: Transition not working properly :D, find out whats the type issue below-->
     <TransitionGroup name="items">
       <GalleryItem
-        v-for="animation in paginatedAnimations"
-        :animation="animation"
+        v-for="(animation, i) in paginatedAnimations"
+        :animation="animation as Animations"
         :key="animation.id"
+        :style="{ '--i': i }"
         :source="getUrl(animation.collectionId, animation.id, animation.screenshot)"
-        @click="show(animation.collectionId, animation.id, animation.riv[0])"
+        @click="show(animation.collectionId, animation.id, animation.riv[0], animation.title)"
       />
     </TransitionGroup>
   </div>
   <Pagination :items-total="props.animations?.length" :per-page="perPage" v-model:current-page="currentPage" />
-  <Modal :visible="visible" @close="close">
+  <Modal :title="rivTitle" :visible="visible" @close="close">
     <RiveAnimation ref="animationRef" :src="rivUrl" state-machine="State Machine 1" />
   </Modal>
 </template>
@@ -25,7 +26,6 @@ import Pagination from '@/components/Pagination.vue'
 import RiveAnimation from '@/components/RiveAnimation.vue'
 import Modal, { useModal } from '@/ui/Modal.vue'
 
-//TODO: Might need better typing!
 const props = defineProps<{
   animations: Animations[] | undefined
 }>()
@@ -39,8 +39,13 @@ const getUrl = (collectionId: string, recordId: string, filename: string) => {
 }
 
 const rivUrl = ref('')
+const rivTitle = ref('')
 
-const paginate = (array: Animations[] | undefined, page_size: number, page_number: number) => {
+const paginate = (
+  array: Animations[] | undefined,
+  page_size: number,
+  page_number: number
+): Animations[] | undefined => {
   return array?.slice((page_number - 1) * page_size, page_number * page_size)
 }
 
@@ -57,8 +62,9 @@ watch(
 // const animationRef = ref<InstanceType<typeof RiveAnimation>>()
 
 const modal = useModal()
-const show = (collectionId: string, recordId: string, riv: string) => {
+const show = (collectionId: string, recordId: string, riv: string, title: string) => {
   rivUrl.value = getUrl(collectionId, recordId, riv)
+  rivTitle.value = title
   modal.showModal()
 }
 const close = () => {
@@ -75,25 +81,41 @@ console.log(props.animations)
   grid-template-columns: repeat(3, 1fr);
   grid-auto-rows: minmax(200px, auto);
   padding: 1rem 0 2rem 0;
-}
-.items-enter-from,
-.items-fade-leave-to {
-  opacity: 0;
-}
+  overflow: hidden;
 
-.items-enter-active,
-.items-leave-active {
-  transition: all 0.95s ease-in-out;
-  opacity: 0;
+  & > * {
+    opacity: 1;
+  }
 }
+.items {
+  &-move {
+    transition: opacity 0.3s linear, transform 0.5s ease-in-out;
+  }
 
-.items-enter-to,
-.items-leave-from {
-  opacity: 0;
-}
+  &-leave-active {
+    transition: opacity 0.2s linear, transform 0.4s cubic-bezier(0.5, 0, 0.7, 0.4); //cubic-bezier(.7,0,.7,1);
+    transition-delay: calc(0.1s * (var(--total) - var(--i)));
+  }
 
-.items-leave-active {
-  position: absolute;
-  opacity: 0;
+  &-enter-active {
+    transition: opacity 0.3s linear, transform 0.5s cubic-bezier(0.2, 0.5, 0.1, 1);
+    transition-delay: calc(0.1s * var(--i));
+  }
+
+  &-enter-from,
+  &-leave-to {
+    opacity: 0;
+  }
+
+  &-enter-from {
+    transform: translateX(-1em);
+  }
+  &-leave-to {
+    transform: translateX(1em);
+  }
+  &-enter-to,
+  &-leave-from {
+    opacity: 1;
+  }
 }
 </style>
