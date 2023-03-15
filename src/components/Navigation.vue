@@ -7,17 +7,23 @@
       <i-navbar-collapsible>
         <i-nav>
           <i-nav-item :to="{ name: 'home' }"> Home </i-nav-item>
+          <i-nav-item :to="{ name: '' }"> Music Apps </i-nav-item>
           <i-nav-item :to="{ name: '' }"> Dashboards </i-nav-item>
           <i-nav-item :to="{ name: '' }"> Components </i-nav-item>
+          <i-nav-item :to="{ name: '' }"> Creative Coding </i-nav-item>
           <i-nav-item :to="{ name: 'animations' }"> Animations </i-nav-item>
         </i-nav>
-        <i-input placeholder="Let's find out!">
+        <!-- <i-input placeholder="Let's find out!">
           <template #append>
             <i-button color="primary">
               <i-icon name="ink-search" />
             </i-button>
           </template>
-        </i-input>
+        </i-input> -->
+        <i-button-group>
+          <i-button :to="{ name: 'login' }">Login</i-button>
+          <i-button :to="{ name: 'register' }">Register</i-button>
+        </i-button-group>
       </i-navbar-collapsible>
     </i-navbar>
   </i-layout-header>

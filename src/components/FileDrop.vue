@@ -1,20 +1,39 @@
 <template>
   <div class="dropzone-container" @dragover.prevent="dragover" @dragleave="dragleave" @drop.prevent="drop">
-    <label :for="name + index" class="file-label">
-      <div v-if="isDragging">Release to drop files here.</div>
-      <div v-else>
-        <slot />
-      </div>
-    </label>
-    <input
-      class="hidden-input"
-      ref="inputEl"
-      type="file"
-      :name="name + index"
-      :id="name + index"
-      :accept="accept"
-      @change="handleFileInputChange"
-    />
+    <template v-if="name && index">
+      <label :for="name + index" class="file-label">
+        <div v-if="isDragging">Release to drop files here.</div>
+        <div v-else>
+          <slot />
+        </div>
+      </label>
+      <input
+        class="hidden-input"
+        ref="inputEl"
+        type="file"
+        :name="name + index"
+        :id="name + index"
+        :accept="accept"
+        @change="handleFileInputChange"
+      />
+    </template>
+    <template v-else>
+      <label for="filedrop" class="file-label">
+        <div v-if="isDragging">Release to drop files here.</div>
+        <div v-else>
+          <slot />
+        </div>
+      </label>
+      <input
+        class="hidden-input"
+        ref="inputEl"
+        type="file"
+        name="filedrop"
+        id="filedrop"
+        :accept="accept"
+        @change="handleFileInputChange"
+      />
+    </template>
   </div>
   <div v-if="file">
     <p>
@@ -28,8 +47,8 @@
 import { ref } from 'vue'
 
 defineProps<{
-  index: number
-  name: string
+  index?: number
+  name?: string
   accept?: string
 }>()
 
