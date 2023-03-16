@@ -1,6 +1,8 @@
 import pb from '@/api/pocketbase'
+import { ref } from 'vue'
 // import type { Animations } from '@/views/AnimationView.vue'
-import type { Record } from 'pocketbase'
+import type { Record, RecordAuthResponse } from 'pocketbase'
+import type { User } from '@/api/types'
 
 export const ensureError = (value: unknown): Error => {
   if (value instanceof Error) return value
@@ -30,3 +32,10 @@ export const createRecord = async (
     return { error: error.message }
   }
 }
+
+export const authWithPassword = async (username: string, password: string): Promise<RecordAuthResponse<User>> =>
+  await pb.collection('users').authWithPassword(username, password)
+
+export const authStore = pb.authStore
+
+export const userState = ref(false)

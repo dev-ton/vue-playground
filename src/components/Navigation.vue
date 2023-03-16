@@ -20,10 +20,17 @@
             </i-button>
           </template>
         </i-input> -->
-        <i-button-group>
+        <i-button-group v-if="!userState">
           <i-button :to="{ name: 'login' }">Login</i-button>
           <i-button :to="{ name: 'register' }">Register</i-button>
         </i-button-group>
+        <div class="logged" v-else>
+          <p>
+            Logged as <span>{{ authStore.model?.username }}</span>
+          </p>
+          <!--TODO: type it, so it knows my User model structure-->
+          <i-button @click="logout">Logout</i-button>
+        </div>
       </i-navbar-collapsible>
     </i-navbar>
   </i-layout-header>
@@ -32,8 +39,14 @@
 // TODO: - display header when scrolling up
 import { ref } from 'vue'
 import { useEventListener } from '@vueuse/core'
+import { authStore, userState } from '@/api/context'
 
 const scrolledNav = ref<boolean>(false)
+
+const logout = () => {
+  userState.value = false
+  authStore.clear()
+}
 
 useEventListener(window, 'scroll', () => {
   updateScroll()
@@ -65,6 +78,17 @@ const updateScroll = () => {
   & img {
     width: 32px;
     height: 32px;
+  }
+}
+
+.logged {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+
+  & > p > span {
+    color: var(--color--secondary);
+    font-weight: 600;
   }
 }
 

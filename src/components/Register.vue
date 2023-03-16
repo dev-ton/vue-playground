@@ -1,10 +1,6 @@
 <template>
   <i-form v-model="form" v-if="!sent" @submit.prevent="onSubmit">
     <i-form-group>
-      <label for="name">Name:</label>
-      <i-input type="text" name="name" id="name" />
-    </i-form-group>
-    <i-form-group>
       <label for="username">Username<sup>*</sup>:</label>
       <i-input type="text" name="username" id="username" required />
       <i-form-error for="username" />
@@ -16,7 +12,7 @@
     </i-form-group>
     <i-form-group>
       <label for="file">Upload your avatar:</label>
-      <i-input type="file" id="file" name="file" />
+      <i-input type="file" id="file" name="file" ref="avatar" />
       <i-form-error for="file" />
     </i-form-group>
     <i-form-group>
@@ -25,9 +21,9 @@
       <i-form-error for="password" />
     </i-form-group>
     <i-form-group>
-      <label for="passwordConfirmation">Confirm your password<sup>*</sup>: </label>
-      <i-input type="password" id="passwordConfirmation" name="passwordConfirmation" required />
-      <i-form-error for="passwordConfirmation" />
+      <label for="passwordConfirm">Confirm your password<sup>*</sup>: </label>
+      <i-input type="password" id="passwordConfirm" name="passwordConfirm" required />
+      <i-form-error for="passwordConfirm" />
     </i-form-group>
     <i-form-group>
       <i-form-label for="checkbox">Checkbox</i-form-label>
@@ -38,22 +34,17 @@
       <i-button type="submit" :loading="loading"> Submit </i-button>
     </i-form-group>
   </i-form>
-  <div v-else>
-    Form succesfully sent with following data:
-    <p>{{ rawData.username.value }}</p>
-    <p>{{ rawData.email.value }}</p>
-    <p>{{ rawData.file.value }}</p>
-  </div>
+  <div v-else-if="errorMessage">{{ errorMessage }}</div>
+  <div v-else>User account successfully created!</div>
 </template>
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useForm } from '@inkline/inkline/composition-api'
 import { deepUnref } from 'vue-deepunref'
+import { createRecord } from '@/api/context'
 
 // TODO: Vee-Validate seems to be better solution
-
 const schema = {
-  name: {},
   username: {
     validateOn: 'input',
     validators: [{ name: 'required' }, { name: 'alphanumeric' }, { name: 'minLength', value: 5 }],
@@ -92,8 +83,8 @@ const schema = {
       },
     ],
   },
-  passwordConfirmation: {
-    validateOn: 'blur',
+  passwordConfirm: {
+    validateOn: 'input',
     validators: [{ name: 'sameAs', target: 'password', schema: () => form.value }],
   },
   checkbox: {
@@ -109,12 +100,35 @@ const schema = {
 const form = useForm(schema)
 const loading = ref<boolean>(false)
 const sent = ref<boolean>(false)
+const errorMessage = ref('')
 
-let rawData: object
+const avatar = ref<HTMLInputElement | null>(null)
+const file = avatar.value?.files
 
-const onSubmit = () => {
+const resetForm = () => {
+  Object.assign(form, schema)
+}
+
+//TODO: seems like the File is not being send, investigate. Also add email verification.
+const onSubmit = async () => {
   loading.value = true
-  rawData = { ...deepUnref(form.value) }
+  const rawData = { ...deepUnref(form.value) }
+  const formData = new FormData()
+  formData.append('username', rawData.username.value)
+  formData.append('email', rawData.email.value)
+  if (file) formData.append('avatar', file[0] as File)
+  formData.append('password', rawData.password.value)
+  formData.append('passwordConfirm', rawData.passwordConfirm.value)
+  await createRecord('users', formData, true)
+    .then((value) => {
+      if (value?.error) {
+        errorMessage.value = value.error
+      } else {
+        sent.value = true
+        resetForm()
+      }
+    })
+    .then(() => (loading.value = false))
   setTimeout(() => {
     loading.value = false
     sent.value = true
