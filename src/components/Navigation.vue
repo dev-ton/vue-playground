@@ -7,11 +7,16 @@
       <i-navbar-collapsible>
         <i-nav>
           <i-nav-item :to="{ name: 'home' }"> Home </i-nav-item>
-          <i-nav-item :to="{ name: '' }"> Music Apps </i-nav-item>
-          <i-nav-item :to="{ name: '' }"> Dashboards </i-nav-item>
-          <i-nav-item :to="{ name: '' }"> Components </i-nav-item>
-          <i-nav-item :to="{ name: '' }"> Creative Coding </i-nav-item>
-          <i-nav-item :to="{ name: 'animations' }"> Animations </i-nav-item>
+          <i-dropdown trigger="hover">
+            <i-nav-item> Work </i-nav-item>
+            <template #body>
+              <i-dropdown-item :to="{ name: '' }"> Music Apps </i-dropdown-item>
+              <i-dropdown-item :to="{ name: '' }"> Dashboards </i-dropdown-item>
+              <i-dropdown-item :to="{ name: '' }"> Components </i-dropdown-item>
+              <i-dropdown-item :to="{ name: '' }"> Creative Coding </i-dropdown-item>
+              <i-dropdown-item :to="{ name: 'animations' }"> Animations </i-dropdown-item>
+            </template>
+          </i-dropdown>
         </i-nav>
         <!-- <i-input placeholder="Let's find out!">
           <template #append>
@@ -20,7 +25,14 @@
             </i-button>
           </template>
         </i-input> -->
-        <i-button-group v-if="!userState">
+        <a class="color-mode" @click="setColorMode">
+          <FaIcon icon="fa-solid fa-moon" v-if="colorMode === 'dark'" />
+          <FaIcon icon="fa-solid fa-sun" v-else />
+          <span class="_visually-hidden">
+            <span>Toggle color mode</span>
+          </span>
+        </a>
+        <i-button-group v-if="!isAuthenticated">
           <i-button :to="{ name: 'login' }">Login</i-button>
           <i-button :to="{ name: 'register' }">Register</i-button>
         </i-button-group>
@@ -37,14 +49,15 @@
 </template>
 <script lang="ts" setup>
 // TODO: - display header when scrolling up
-import { ref } from 'vue'
+import { ref, inject } from 'vue'
 import { useEventListener } from '@vueuse/core'
-import { authStore, userState } from '@/api/context'
+import { authStore, isAuthenticated } from '@/api/context'
+import type { Prototype } from '@inkline/inkline/plugin'
 
 const scrolledNav = ref<boolean>(false)
 
 const logout = () => {
-  userState.value = false
+  isAuthenticated.value = false
   authStore.clear()
 }
 
@@ -57,6 +70,22 @@ const updateScroll = () => {
     return (scrolledNav.value = true)
   }
   scrolledNav.value = false
+}
+
+const inkline = inject<Prototype>('inkline', {} as any)
+const colorMode = ref(inkline.options.colorMode)
+
+// Set the initial color mode value to determine the icon to be displayed
+if (colorMode.value === 'system' && typeof window !== 'undefined') {
+  colorMode.value = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+}
+
+// Toggle between light and dark mode
+const setColorMode = () => {
+  const mode = colorMode.value === 'dark' ? 'light' : 'dark'
+
+  inkline.options.colorMode = mode
+  colorMode.value = mode
 }
 </script>
 <style lang="scss" scoped>
@@ -90,6 +119,10 @@ const updateScroll = () => {
     color: var(--color--secondary);
     font-weight: 600;
   }
+}
+
+.color-mode {
+  cursor: pointer;
 }
 
 .scrolled-nav {

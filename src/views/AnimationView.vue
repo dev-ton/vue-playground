@@ -2,7 +2,7 @@
   <i-container>
     <i-row>
       <i-column>
-        <CollapsibleSingle v-model:is-open="isOpen" title="Upload new animation(s)">
+        <CollapsibleSingle v-if="isAuthenticated" v-model:is-open="isOpen" title="Upload new animation(s)">
           <FileUpload @collapse="collapseToggle" />
         </CollapsibleSingle>
       </i-column>
@@ -23,6 +23,7 @@
 import { ref, onBeforeMount } from 'vue'
 import pb from '@/api/pocketbase'
 import type { Record } from 'pocketbase'
+import { isAuthenticated } from '@/api/context'
 
 import Loader from '@/components/Loader.vue'
 import CollapsibleSingle from '@/ui/CollapsibleSingle.vue'

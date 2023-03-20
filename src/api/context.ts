@@ -1,8 +1,8 @@
 import pb from '@/api/pocketbase'
-import { ref } from 'vue'
 // import type { Animations } from '@/views/AnimationView.vue'
 import type { Record, RecordAuthResponse } from 'pocketbase'
 import type { User } from '@/api/types'
+import { useStorage, useIntervalFn } from '@vueuse/core'
 
 export const ensureError = (value: unknown): Error => {
   if (value instanceof Error) return value
@@ -38,4 +38,15 @@ export const authWithPassword = async (username: string, password: string): Prom
 
 export const authStore = pb.authStore
 
-export const userState = ref(false)
+export const isAuthenticated = useStorage('is-authenticated', false)
+
+const checkToken = () => {
+  if (!authStore.isValid) {
+    localStorage.setItem('is-authenticated', 'false')
+  }
+}
+
+useIntervalFn(() => {
+  checkToken()
+  console.log('tick ' + authStore.isValid + ' ' + isAuthenticated.value)
+}, 12000)

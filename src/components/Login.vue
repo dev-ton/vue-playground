@@ -1,5 +1,5 @@
 <template>
-  <i-form v-if="!userState" @submit.prevent="onSubmit">
+  <i-form v-if="!isAuthenticated" @submit.prevent="onSubmit">
     <i-form-group>
       <label for="username">Username or Email:</label>
       <i-input type="text" name="username" id="username" v-model="username" />
@@ -17,7 +17,7 @@
 </template>
 <script setup lang="ts">
 import { ref, unref } from 'vue'
-import { authWithPassword, authStore, userState } from '@/api/context'
+import { authWithPassword, authStore, isAuthenticated } from '@/api/context'
 
 const username = ref('')
 const password = ref('')
@@ -29,9 +29,9 @@ const user = ref('')
 
 const updateState = () => {
   if (authStore.isValid) {
-    userState.value = true
+    isAuthenticated.value = true
   } else {
-    userState.value = false
+    isAuthenticated.value = false
   }
 }
 const resetForm = () => {
