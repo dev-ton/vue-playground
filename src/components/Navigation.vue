@@ -13,7 +13,7 @@
               <i-dropdown-item :to="{ name: '' }"> Music Apps </i-dropdown-item>
               <i-dropdown-item :to="{ name: '' }"> Dashboards </i-dropdown-item>
               <i-dropdown-item :to="{ name: '' }"> Components </i-dropdown-item>
-              <i-dropdown-item :to="{ name: '' }"> Creative Coding </i-dropdown-item>
+              <i-dropdown-item :to="{ name: 'creative' }"> Creative Coding </i-dropdown-item>
               <i-dropdown-item :to="{ name: 'animations' }"> Animations </i-dropdown-item>
             </template>
           </i-dropdown>

@@ -18,6 +18,11 @@ const router = createRouter({
       component: () => import('@/views/AboutView.vue'),
     },
     {
+      path: '/creative-coding',
+      name: 'creative',
+      component: () => import('@/views/CreativeView.vue'),
+    },
+    {
       path: '/animations',
       name: 'animations',
       component: () => import('@/views/AnimationView.vue'),
