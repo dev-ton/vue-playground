@@ -18,6 +18,7 @@
   </div>
 </template>
 <script setup lang="ts">
+//TODO: add some accessibility stuff
 import { onMounted, ref, computed, toRefs } from 'vue'
 import { useMouse, useRafFn, useEventListener } from '@vueuse/core'
 
@@ -25,7 +26,7 @@ export interface Props {
   min?: number
   max?: number
   speed?: number
-  value?: number
+  value: number
 }
 const props = withDefaults(defineProps<Props>(), {
   min: 40,
@@ -35,7 +36,7 @@ const props = withDefaults(defineProps<Props>(), {
 })
 
 const emit = defineEmits<{
-  (e: 'change', value: number): void
+  (e: 'update:value', value: number): void
 }>()
 /**
  * Represents a 2-dimensional vector
@@ -108,7 +109,7 @@ const updateValue = (diff: number) => {
   model.value = Math.max(Math.min(model.value + speed.value * diff, max.value), min.value)
 
   if (displayValue.value !== lastEmittedValue) {
-    emit('change', displayValue.value)
+    emit('update:value', displayValue.value)
     lastEmittedValue = displayValue.value
   }
 }
