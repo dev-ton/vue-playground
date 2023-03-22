@@ -18,6 +18,11 @@ const router = createRouter({
       component: () => import('@/views/AboutView.vue'),
     },
     {
+      path: '/audio-apps',
+      name: 'audio',
+      component: () => import('@/views/AudioView.vue'),
+    },
+    {
       path: '/creative-coding',
       name: 'creative',
       component: () => import('@/views/CreativeView.vue'),

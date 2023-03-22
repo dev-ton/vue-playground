@@ -11,7 +11,6 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faBars, faMoon, faSun, faTrash, faXmark } from '@fortawesome/free-solid-svg-icons'
 
-import '@/assets/main.css'
 import '@/assets/main.scss'
 
 const app = createApp(App)

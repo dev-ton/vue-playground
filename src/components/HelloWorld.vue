@@ -1,5 +1,5 @@
 <template>
-  <i-container fluid>
+  <i-container>
     <i-row>
       <i-column>
         <div class="d1">Zen Garden</div>

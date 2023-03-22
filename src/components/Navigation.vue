@@ -7,10 +7,10 @@
       <i-navbar-collapsible>
         <i-nav>
           <i-nav-item :to="{ name: 'home' }"> Home </i-nav-item>
-          <i-dropdown trigger="hover">
+          <i-dropdown trigger="hover" placement="bottom-start">
             <i-nav-item> Work </i-nav-item>
             <template #body>
-              <i-dropdown-item :to="{ name: '' }"> Music Apps </i-dropdown-item>
+              <i-dropdown-item :to="{ name: 'audio' }"> Audio Apps </i-dropdown-item>
               <i-dropdown-item :to="{ name: '' }"> Dashboards </i-dropdown-item>
               <i-dropdown-item :to="{ name: '' }"> Components </i-dropdown-item>
               <i-dropdown-item :to="{ name: 'creative' }"> Creative Coding </i-dropdown-item>

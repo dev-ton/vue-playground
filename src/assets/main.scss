@@ -189,3 +189,7 @@
 @include i-pagination() {
     ----opacity--disabled: 0.2;
 }
+
+@include i-button() {
+  ----opacity--disabled: 0.2;
+}

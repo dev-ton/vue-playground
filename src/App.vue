@@ -1,9 +1,11 @@
 <template>
-  <Navigation />
-  <i-layout-content class="main">
-    <RouterView />
-  </i-layout-content>
-  <i-layout-footer> </i-layout-footer>
+  <i-layout>
+    <Navigation />
+    <i-layout-content class="main">
+      <RouterView />
+    </i-layout-content>
+    <i-layout-footer> </i-layout-footer>
+  </i-layout>
 </template>
 
 <script setup lang="ts">

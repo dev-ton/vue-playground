@@ -8,12 +8,13 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
 
-const numOfPoints = ref(0)
+const numOfPoints = ref(3)
 const size = ref(1000)
 const scene = ref<SVGElement | null>(null)
 const sceneOutput = ref<string[]>([])
 
 function renderPoints(numOfPoints: number, size: number) {
+  console.log('renderPoints triggered: ', numOfPoints)
   const polarToCartesian = (r: number, degrees: number) => {
     const radians = (degrees * Math.PI) / 180.0
     return [r + r * Math.cos(radians), r + r * Math.sin(radians)]
@@ -40,18 +41,18 @@ function renderPoints(numOfPoints: number, size: number) {
     })
   }
 
-  sceneOutput.value = data.map((entry) => {
+  scene.value.innerHTML = data.map((entry) => {
     const [x, y] = entry
+    console.log(scene.value.innerHTML)
     return renderLines(x, y).join('')
   })
-  console.log('renderPoints triggered')
 }
 // renderPoints(numOfPoints.value, size.value)
 
-//TODO: SOmehow it generates the svg lines only once
+//TODO: SOmehow it generates the svg lines only once // Reference: https://dev.to/madsstoumann/svg-geometry-and-a-dash-of-javascript-3f9l
 
 watch(numOfPoints, function (newValue, oldValue) {
-  renderPoints(newValue, size.value)
+  renderPoints(oldValue, size.value)
   console.log(newValue, oldValue)
 })
 
