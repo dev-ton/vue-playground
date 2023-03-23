@@ -33,7 +33,7 @@
             <SliderControl id="gain" v-model:value="gainValue" :precision="2" :min="0" :max="1" :step="0.05" />
           </div>
           <div>
-            <label for="duty">Duty cycle:</label>
+            <label for="duty">Duty cycle {{ dutyCycle }}</label>
             <SliderControl id="duty" :disabled="waveform !== 'custom'" :max="1" v-model:value="dutyCycle" />
           </div>
         </div>
@@ -77,6 +77,7 @@ const oscillator: OscillatorNode = new OscillatorNode(ctx, {
   type: waveform.value,
   frequency: freqValue.value,
 })
+const convolver = ctx.createConvolver()
 
 let pixelRatio, sizeOnScreen, segmentWidth, c: CanvasRenderingContext2D
 
@@ -117,9 +118,31 @@ onMounted(() => {
   }
 })
 
+// impulse response for reverb buffer
+const impulseResponse = (duration: number, decay: number, reverse: boolean) => {
+  let sampleRate = ctx.sampleRate
+  let length = sampleRate * duration
+  let impulse = ctx.createBuffer(2, length, sampleRate)
+  let impulseL = impulse.getChannelData(0)
+  let impulseR = impulse.getChannelData(1)
+
+  if (!decay) decay = 2.0
+  for (let i = 0; i < length; i++) {
+    let n = reverse ? length - i : i
+    impulseL[i] = (Math.random() * 2 - 1) * Math.pow(1 - n / length, decay)
+    impulseR[i] = (Math.random() * 2 - 1) * Math.pow(1 - n / length, decay)
+  }
+  return impulse
+}
+
+const impulseBuffer = impulseResponse(8, 4, false)
+
 // conections and osc start
 oscillator.connect(ctx.destination)
 oscillator.connect(gainNode)
+convolver.buffer = impulseBuffer
+oscillator.connect(convolver)
+convolver.connect(ctx.destination)
 gainNode.connect(ctx.destination)
 gainNode.connect(analyser)
 analyser.connect(ctx.destination)
