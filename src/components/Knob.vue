@@ -143,7 +143,7 @@ const increment = () => {
   width: 108px;
   height: 108px;
   border-radius: 50%;
-  cursor: pointer;
+  cursor: grab;
   outline: none;
   -webkit-tap-highlight-color: transparent;
   border: 6px solid var(--color--black);

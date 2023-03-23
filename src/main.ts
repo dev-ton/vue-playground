@@ -9,13 +9,13 @@ import '@inkline/inkline/inkline.scss'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { faBars, faMoon, faSun, faTrash, faXmark } from '@fortawesome/free-solid-svg-icons'
+import { faBars, faMoon, faPowerOff, faSun, faTrash, faXmark } from '@fortawesome/free-solid-svg-icons'
 
 import '@/assets/main.scss'
 
 const app = createApp(App)
 
-library.add(faBars, faXmark, faTrash, faMoon, faSun)
+library.add(faBars, faXmark, faTrash, faMoon, faSun, faPowerOff)
 
 app.use(createPinia())
 app.use(router)
