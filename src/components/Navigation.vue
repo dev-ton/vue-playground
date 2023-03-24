@@ -2,7 +2,7 @@
   <i-layout-header :class="['mainHeader', scrolledNav ? 'scrolled-nav' : '']">
     <i-navbar>
       <i-navbar-brand :to="{ name: 'home' }">
-        <img src="@/assets/logo.svg" alt="V-playground" />
+        <!-- <img src="@/assets/logo.svg" alt="V-playground" /> -->
       </i-navbar-brand>
       <i-navbar-collapsible>
         <i-nav>
@@ -12,7 +12,7 @@
             <template #body>
               <i-dropdown-item :to="{ name: 'audio' }"> Audio Apps </i-dropdown-item>
               <i-dropdown-item :to="{ name: '' }"> Dashboards </i-dropdown-item>
-              <i-dropdown-item :to="{ name: '' }"> Components </i-dropdown-item>
+              <i-dropdown-item :to="{ name: 'components' }"> Components </i-dropdown-item>
               <i-dropdown-item :to="{ name: 'creative' }"> Creative Coding </i-dropdown-item>
               <i-dropdown-item :to="{ name: 'animations' }"> Animations </i-dropdown-item>
             </template>

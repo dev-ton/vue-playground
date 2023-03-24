@@ -1,6 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '@/views/HomeView.vue'
 
+// TODO: do more dynamic routing so I dont have hunderds of view templates
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -26,6 +28,11 @@ const router = createRouter({
       path: '/creative-coding',
       name: 'creative',
       component: () => import('@/views/CreativeView.vue'),
+    },
+    {
+      path: '/components',
+      name: 'components',
+      component: () => import('@/views/ComponentsView.vue'),
     },
     {
       path: '/animations',
