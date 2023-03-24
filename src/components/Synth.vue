@@ -30,7 +30,7 @@
         <div class="item sliders">
           <div>
             <label for="gain">Gain {{ gainValue }}</label>
-            <SliderControl id="gain" v-model:value="gainValue" :precision="2" :max="1" />
+            <SliderControl id="gain" v-model:value="gainValue" :max="1" :step="0.05" />
           </div>
           <div>
             <label for="duty">Duty cycle {{ dutyCycle }}</label>

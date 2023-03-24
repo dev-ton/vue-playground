@@ -1,19 +1,17 @@
 <template>
-  <div>
-    <input
-      type="range"
-      v-bind="$attrs"
-      class="range blue"
-      :min="min"
-      :max="max"
-      v-model.number="modelValue"
-      :step="step"
-      :list="listName"
-    />
-    <datalist v-if="list" :id="listName">
-      <option v-for="listItem in list" :key="listItem">{{ listItem }}</option>
-    </datalist>
-  </div>
+  <input
+    type="range"
+    v-bind="$attrs"
+    class="range blue"
+    :min="min"
+    :max="max"
+    v-model.number="modelValue"
+    :step="step"
+    :list="listName"
+  />
+  <datalist v-if="list" :id="listName">
+    <option v-for="listItem in list" :key="listItem">{{ listItem }}</option>
+  </datalist>
 </template>
 <script setup lang="ts">
 import { computed } from 'vue'
