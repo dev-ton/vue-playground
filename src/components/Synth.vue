@@ -61,6 +61,7 @@ const state = ref('off')
 const gainValue = ref(0.5)
 const dutyCycle = ref(0.5)
 const freqValue = ref(440)
+// eslint-disable-next-line no-undef
 const waveform = ref<OscillatorType>('sine')
 const canvas = ref<HTMLCanvasElement | null>(null)
 
@@ -107,7 +108,7 @@ onMounted(() => {
     canvas.value.style.width = canvas.value.width / pixelRatio + 'px'
     canvas.value.style.height = canvas.value.height / pixelRatio + 'px'
     canvas.value.style.borderRadius = 50 + '%'
-    c = canvas.value.getContext('2d')
+    c = canvas.value.getContext('2d') as CanvasRenderingContext2D
     c.fillStyle = '#181818'
     c.fillRect(0, 0, canvas.value.width, canvas.value.height)
     c.strokeStyle = 'hsl(195 77% 39% / 1)'
