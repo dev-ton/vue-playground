@@ -1,19 +1,21 @@
 <template>
-  <i-form v-if="!isAuthenticated" @submit.prevent="onSubmit">
-    <i-form-group>
-      <label for="username">Username or Email:</label>
-      <i-input type="text" name="username" id="username" v-model="username" />
-    </i-form-group>
-    <i-form-group>
-      <label for="password">Password:</label>
-      <i-input type="password" name="password" id="password" v-model="password" />
-    </i-form-group>
-    <i-form-group>
-      <i-button type="submit" :loading="loading">Log In</i-button>
-    </i-form-group>
-  </i-form>
-  <div v-else>Hi {{ user }}! You have been logged in.</div>
-  <div v-if="error">{{ error }}</div>
+  <div class="form-container">
+    <i-form v-if="!isAuthenticated" @submit.prevent="onSubmit">
+      <i-form-group>
+        <label for="username">Username or Email:</label>
+        <i-input type="text" name="username" id="username" v-model="username" />
+      </i-form-group>
+      <i-form-group>
+        <label for="password">Password:</label>
+        <i-input type="password" name="password" id="password" v-model="password" />
+      </i-form-group>
+      <i-form-group>
+        <i-button type="submit" :loading="loading">Log In</i-button>
+      </i-form-group>
+    </i-form>
+    <div v-else>Hi {{ user }}! You have been logged in.</div>
+    <div v-if="error">{{ error }}</div>
+  </div>
 </template>
 <script setup lang="ts">
 import { ref, unref } from 'vue'
@@ -56,3 +58,8 @@ const onSubmit = () => {
   )
 }
 </script>
+<style lang="scss" scoped>
+.form-container {
+  text-align: left;
+}
+</style>

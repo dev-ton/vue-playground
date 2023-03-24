@@ -1,7 +1,7 @@
 <template>
   <i-container>
-    <i-row>
-      <i-column>
+    <i-row center>
+      <i-column xs="12" md="4">
         <Login />
       </i-column>
     </i-row>

@@ -1,41 +1,43 @@
 <template>
-  <i-form v-model="form" v-if="!sent" @submit.prevent="onSubmit">
-    <i-form-group>
-      <label for="username">Username<sup>*</sup>:</label>
-      <i-input type="text" name="username" id="username" required />
-      <i-form-error for="username" />
-    </i-form-group>
-    <i-form-group>
-      <label for="email">Email<sup>*</sup>:</label>
-      <i-input type="email" id="email" name="email" required />
-      <i-form-error for="email" />
-    </i-form-group>
-    <i-form-group>
-      <label for="file">Upload your avatar:</label>
-      <i-input type="file" id="file" name="file" ref="avatar" />
-      <i-form-error for="file" />
-    </i-form-group>
-    <i-form-group>
-      <label for="password">Password<sup>*</sup>: </label>
-      <i-input type="password" id="password" name="password" required />
-      <i-form-error for="password" />
-    </i-form-group>
-    <i-form-group>
-      <label for="passwordConfirm">Confirm your password<sup>*</sup>: </label>
-      <i-input type="password" id="passwordConfirm" name="passwordConfirm" required />
-      <i-form-error for="passwordConfirm" />
-    </i-form-group>
-    <i-form-group>
-      <i-form-label for="checkbox">Checkbox</i-form-label>
-      <i-checkbox name="checkbox" required>I accept the terms and conditions<sup>*</sup></i-checkbox>
-      <i-form-error for="checkbox" />
-    </i-form-group>
-    <i-form-group>
-      <i-button type="submit" :loading="loading"> Submit </i-button>
-    </i-form-group>
-  </i-form>
-  <div v-else-if="errorMessage">{{ errorMessage }}</div>
-  <div v-else>User account successfully created!</div>
+  <div class="form-container">
+    <i-form v-model="form" v-if="!sent" @submit.prevent="onSubmit">
+      <i-form-group>
+        <label for="username">Username<sup>*</sup>:</label>
+        <i-input type="text" name="username" id="username" required />
+        <i-form-error for="username" />
+      </i-form-group>
+      <i-form-group>
+        <label for="email">Email<sup>*</sup>:</label>
+        <i-input type="email" id="email" name="email" required />
+        <i-form-error for="email" />
+      </i-form-group>
+      <i-form-group>
+        <label for="file">Upload your avatar:</label>
+        <i-input type="file" id="file" name="file" ref="avatar" />
+        <i-form-error for="file" />
+      </i-form-group>
+      <i-form-group>
+        <label for="password">Password<sup>*</sup>: </label>
+        <i-input type="password" id="password" name="password" required />
+        <i-form-error for="password" />
+      </i-form-group>
+      <i-form-group>
+        <label for="passwordConfirm">Confirm your password<sup>*</sup>: </label>
+        <i-input type="password" id="passwordConfirm" name="passwordConfirm" required />
+        <i-form-error for="passwordConfirm" />
+      </i-form-group>
+      <i-form-group>
+        <i-form-label for="checkbox">Checkbox</i-form-label>
+        <i-checkbox name="checkbox" required>I accept the terms and conditions<sup>*</sup></i-checkbox>
+        <i-form-error for="checkbox" />
+      </i-form-group>
+      <i-form-group>
+        <i-button type="submit" :loading="loading"> Submit </i-button>
+      </i-form-group>
+    </i-form>
+    <div v-else-if="errorMessage">{{ errorMessage }}</div>
+    <div v-else>User account successfully created!</div>
+  </div>
 </template>
 <script setup lang="ts">
 import { ref } from 'vue'
@@ -135,3 +137,8 @@ const onSubmit = async () => {
   }, 500)
 }
 </script>
+<style lang="scss" scoped>
+.form-container {
+  text-align: left;
+}
+</style>
