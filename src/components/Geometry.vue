@@ -41,9 +41,9 @@ function renderPoints(numOfPoints: number, size: number) {
     })
   }
 
-  scene.value.innerHTML = data.map((entry) => {
+  sceneOutput.value = data.map((entry) => {
     const [x, y] = entry
-    console.log(scene.value.innerHTML)
+    console.log(sceneOutput.value)
     return renderLines(x, y).join('')
   })
 }
