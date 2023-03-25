@@ -1,5 +1,6 @@
 import PocketBase from 'pocketbase'
 
-const pb = new PocketBase(import.meta.env.VITE_PB_URL as string)
+export const url = import.meta.env.VITE_PB_URL as string
+const pb = new PocketBase(url)
 
 export default pb

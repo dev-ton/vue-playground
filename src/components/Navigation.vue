@@ -11,7 +11,7 @@
             <i-nav-item> Work </i-nav-item>
             <template #body>
               <i-dropdown-item :to="{ name: 'audio' }"> Audio Apps </i-dropdown-item>
-              <i-dropdown-item :to="{ name: '' }"> Dashboards </i-dropdown-item>
+              <i-dropdown-item :to="{ name: 'dashboards' }"> Dashboards </i-dropdown-item>
               <i-dropdown-item :to="{ name: 'components' }"> Components </i-dropdown-item>
               <i-dropdown-item :to="{ name: 'creative' }"> Creative Coding </i-dropdown-item>
               <i-dropdown-item :to="{ name: 'animations' }"> Animations </i-dropdown-item>

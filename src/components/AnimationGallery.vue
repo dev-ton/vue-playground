@@ -25,6 +25,7 @@ import GalleryItem from '@/components/GalleryItem.vue'
 import Pagination from '@/components/Pagination.vue'
 import RiveAnimation from '@/components/RiveAnimation.vue'
 import Modal, { useModal } from '@/ui/Modal.vue'
+import { url } from '@/api/pocketbase'
 
 const props = defineProps<{
   animations: Animations[] | undefined
@@ -35,8 +36,10 @@ const perPage = ref<number>(9)
 const currentPage = ref<number>(1)
 
 const getUrl = (collectionId: string, recordId: string, filename: string) => {
-  return new URL(`../../db/pb_data/storage/${collectionId}/${recordId}/${filename}`, import.meta.url).href
+  return `${url}/api/files/${collectionId}/${recordId}/${filename}`
 }
+
+// in case of importing local files use this syntax: new URL(`../../path/to/the/${file}`, import.meta.url).href
 
 const rivUrl = ref('')
 const rivTitle = ref('')
