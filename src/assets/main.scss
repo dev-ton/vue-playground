@@ -44,3 +44,7 @@
 @include i-button() {
   ----opacity--disabled: 0.2;
 }
+
+@include i-navbar() {
+  border: none;
+}
