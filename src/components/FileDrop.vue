@@ -18,7 +18,7 @@
       />
     </template>
     <template v-else>
-      <label for="filedrop" class="file-label">
+      <label :for="name" class="file-label">
         <div v-if="isDragging">Release to drop files here.</div>
         <div v-else>
           <slot />
@@ -28,8 +28,8 @@
         class="hidden-input"
         ref="inputEl"
         type="file"
-        name="filedrop"
-        id="filedrop"
+        :name="name"
+        :id="name"
         :accept="accept"
         @change="handleFileInputChange"
       />
@@ -48,7 +48,7 @@ import { ref } from 'vue'
 
 defineProps<{
   index?: number
-  name?: string
+  name: string
   accept?: string
 }>()
 

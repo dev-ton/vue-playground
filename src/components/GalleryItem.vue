@@ -8,6 +8,7 @@
   </div>
 </template>
 <script lang="ts" setup>
+//TODO: rewrite it to generic Card component
 import type { Animations } from '@/views/AnimationView.vue'
 const props = defineProps<{
   animation: Animations
@@ -18,7 +19,7 @@ const props = defineProps<{
 .item {
   padding: 0.5rem;
   border-radius: 24px;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: var(--color--gray-80);
   cursor: pointer;
   border: 1px solid black;
   transition: border ease 0.3s;

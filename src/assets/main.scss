@@ -1,189 +1,40 @@
 @import '@inkline/inkline/css/variables';
 @import '@inkline/inkline/css/mixins';
-/**
- * @license
- *
- * Font Family: Satoshi
- * Designed by: Deni Anggara
- * URL: https://www.fontshare.com/fonts/satoshi
- * Â© 2023 Indian Type Foundry
- *
- * Font Styles:
- * Satoshi Variable(Variable font)
- * Satoshi Variable Italic(Variable font)
- * Satoshi Light
- * Satoshi Light Italic
- * Satoshi Regular
- * Satoshi Italic
- * Satoshi Medium
- * Satoshi Medium Italic
- * Satoshi Bold
- * Satoshi Bold Italic
- * Satoshi Black
- * Satoshi Black Italic
- *
-*/
-
-
-/**
-* This is a variable font
-* You can controll variable axes as shown below:
-* font-variation-settings: 'wght' 900.0;
-*
-* available axes:
-
-* 'wght' (range from 300.0 to 900.0)
-
-*/
-
-@font-face {
-    font-family: 'Satoshi-Variable';
-    src: url('fonts/Satoshi-Variable.woff2') format('woff2'),
-         url('fonts/Satoshi-Variable.woff') format('woff'),
-         url('fonts/Satoshi-Variable.ttf') format('truetype');
-         font-weight: 300 900;
-         font-display: swap;
-         font-style: normal;
-  }
-  
-  
-  /**
-  * This is a variable font
-  * You can controll variable axes as shown below:
-  * font-variation-settings: 'wght' 900.0;
-  *
-  * available axes:
-  
-  * 'wght' (range from 300.0 to 900.0)
-  
-  */
-  
-  @font-face {
-    font-family: 'Satoshi-VariableItalic';
-    src: url('fonts/Satoshi-VariableItalic.woff2') format('woff2'),
-         url('fonts/Satoshi-VariableItalic.woff') format('woff'),
-         url('fonts/Satoshi-VariableItalic.ttf') format('truetype');
-         font-weight: 300 900;
-         font-display: swap;
-         font-style: italic;
-  }
-  
-  
-  @font-face {
-    font-family: 'Satoshi-Light';
-    src: url('fonts/Satoshi-Light.woff2') format('woff2'),
-         url('fonts/Satoshi-Light.woff') format('woff'),
-         url('fonts/Satoshi-Light.ttf') format('truetype');
-         font-weight: 300;
-         font-display: swap;
-         font-style: normal;
-  }
-  
-  
-  @font-face {
-    font-family: 'Satoshi-LightItalic';
-    src: url('fonts/Satoshi-LightItalic.woff2') format('woff2'),
-         url('fonts/Satoshi-LightItalic.woff') format('woff'),
-         url('fonts/Satoshi-LightItalic.ttf') format('truetype');
-         font-weight: 300;
-         font-display: swap;
-         font-style: italic;
-  }
-  
-  
-  @font-face {
-    font-family: 'Satoshi-Regular';
-    src: url('fonts/Satoshi-Regular.woff2') format('woff2'),
-         url('fonts/Satoshi-Regular.woff') format('woff'),
-         url('fonts/Satoshi-Regular.ttf') format('truetype');
-         font-weight: 400;
-         font-display: swap;
-         font-style: normal;
-  }
-  
-  
-  @font-face {
-    font-family: 'Satoshi-Italic';
-    src: url('fonts/Satoshi-Italic.woff2') format('woff2'),
-         url('fonts/Satoshi-Italic.woff') format('woff'),
-         url('fonts/Satoshi-Italic.ttf') format('truetype');
-         font-weight: 400;
-         font-display: swap;
-         font-style: italic;
-  }
-  
-  
-  @font-face {
-    font-family: 'Satoshi-Medium';
-    src: url('fonts/Satoshi-Medium.woff2') format('woff2'),
-         url('fonts/Satoshi-Medium.woff') format('woff'),
-         url('fonts/Satoshi-Medium.ttf') format('truetype');
-         font-weight: 500;
-         font-display: swap;
-         font-style: normal;
-  }
-  
-  
-  @font-face {
-    font-family: 'Satoshi-MediumItalic';
-    src: url('fonts/Satoshi-MediumItalic.woff2') format('woff2'),
-         url('fonts/Satoshi-MediumItalic.woff') format('woff'),
-         url('fonts/Satoshi-MediumItalic.ttf') format('truetype');
-         font-weight: 500;
-         font-display: swap;
-         font-style: italic;
-  }
-  
-  
-  @font-face {
-    font-family: 'Satoshi-Bold';
-    src: url('fonts/Satoshi-Bold.woff2') format('woff2'),
-         url('fonts/Satoshi-Bold.woff') format('woff'),
-         url('fonts/Satoshi-Bold.ttf') format('truetype');
-         font-weight: 700;
-         font-display: swap;
-         font-style: normal;
-  }
-  
-  
-  @font-face {
-    font-family: 'Satoshi-BoldItalic';
-    src: url('fonts/Satoshi-BoldItalic.woff2') format('woff2'),
-         url('fonts/Satoshi-BoldItalic.woff') format('woff'),
-         url('fonts/Satoshi-BoldItalic.ttf') format('truetype');
-         font-weight: 700;
-         font-display: swap;
-         font-style: italic;
-  }
-  
-  
-  @font-face {
-    font-family: 'Satoshi-Black';
-    src: url('fonts/Satoshi-Black.woff2') format('woff2'),
-         url('fonts/Satoshi-Black.woff') format('woff'),
-         url('fonts/Satoshi-Black.ttf') format('truetype');
-         font-weight: 900;
-         font-display: swap;
-         font-style: normal;
-  }
-  
-  
-  @font-face {
-    font-family: 'Satoshi-BlackItalic';
-    src: url('fonts/Satoshi-BlackItalic.woff2') format('woff2'),
-         url('fonts/Satoshi-BlackItalic.woff') format('woff'),
-         url('fonts/Satoshi-BlackItalic.ttf') format('truetype');
-         font-weight: 900;
-         font-display: swap;
-         font-style: italic;
-  }
-  
-
+@import './fonts.scss';
 
 :root {
-    --color--primary--h: 195deg;
-    --color--primary--s: 77%;
-    --color--primary--l: 39%;
+    /***  Vulcan Dark ***/
+    --color--dark--h: 222deg;
+    --color--dark--s: 32%;
+    --color--dark--l: 8%; /* original 8% */
+    /***  Vulcan Light  ***/
+    --color--light--h: 222deg;
+    --color--light--s: 32%;
+    --color--light--l: 94%; /* original 94% */
+    /***  Margueritte  ***/
+    --color--primary--h: 243deg;
+    --color--primary--s: 40%;
+    --color--primary--l: 56%; /* original 56% */
+    /***  Brain  ***/
+    --color--secondary--h: 315deg;
+    --color--secondary--s: 44%;
+    --color--secondary--l: 55%; /* original 55% */
+    /***  Tuna  ***/
+    --color--gray--h: 216deg;
+    --color--gray--s: 13%;
+    --color--gray--l: 50%; /* original 72% */
+
+
+    --body--background--dark: var(--color--dark);
+    --body--color--dark: var(--color--light);
+
+    --body--background--light: var(--color--light);
+    --body--color--light: var(--color--dark);
+
+
+    --font-family-primary--base: Satoshi-Variable, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen-Sans, Ubuntu, Cantarell, system-ui, 'Helvetica Neue', sans-serif;
+    --font-family-primary--monospace: JetBrainsMono-Variable, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace; 
+    --font-family-secondary--base: Technor-Variable, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen-Sans, Ubuntu, Cantarell, Helvetica Neue, sans-serif;
 }
 
 @include i-pagination() {
