@@ -122,7 +122,7 @@
     <i-row class="_margin-top:2">
       <i-column>
         <i-header color="primary" class="_text-align:center">
-          <h1>Zen Garden Primary Header</h1>
+          <h1 class="_color:light-50">Zen Garden Primary Header</h1>
           <p>This is a header paragraph lorem ipsum dolor sit amet.</p>
           <i-button color="light">Button</i-button>
         </i-header></i-column
@@ -180,7 +180,7 @@
     </i-row>
     <i-row class="_margin-top:2">
       <i-column>
-        <i-progress color="dark">
+        <i-progress>
           <i-progress-bar :value="counter" />
         </i-progress>
       </i-column>

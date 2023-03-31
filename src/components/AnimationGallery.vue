@@ -83,7 +83,8 @@ console.log(props.animations)
   grid-gap: 2rem;
   grid-template-columns: repeat(3, 1fr);
   grid-auto-rows: minmax(200px, auto);
-  padding: 1rem 0 2rem 0;
+  margin: 0 -2rem; /* retain shadows 'hack' */
+  padding: 1rem 2rem 3rem 2rem;
   overflow: hidden;
 
   & > * {

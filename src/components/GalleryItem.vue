@@ -1,6 +1,8 @@
 <template>
-  <div class="item">
-    <img :src="props.source" class="screenshot" alt="" />
+  <div class="item -dark">
+    <div>
+      <img :src="props.source" class="screenshot" alt="" />
+    </div>
     <div class="content">
       <h2>{{ animation.title }}</h2>
       <p>{{ animation.description }}</p>
@@ -17,36 +19,74 @@ const props = defineProps<{
 </script>
 <style lang="scss" scoped>
 .item {
-  padding: 0.5rem;
-  border-radius: 24px;
-  background-color: var(--color--gray-80);
+  padding: var(--padding);
+  border-radius: var(--border-radius);
   cursor: pointer;
-  border: 1px solid black;
-  transition: border ease 0.3s;
+  transition: all ease-in-out var(--transition-duration);
+  overflow: hidden;
   box-sizing: content-box;
+  // border: 1px solid transparent;
+  box-shadow: var(--box-shadow--plain-black);
+  position: relative;
 
-  &:hover {
-    border: 1px solid antiquewhite;
+  &::after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    content: '';
+    border-radius: inherit;
+    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.1);
   }
 
-  & > img {
-    aspect-ratio: 4 / 3;
-    object-fit: cover;
-    object-position: center;
-    border-radius: 16px;
+  body.-dark & {
+    background: var(--color--gray-80);
+    // border-color: var(--color--dark-40);
+  }
+
+  body.-dark &:hover {
+    border-color: var(--color--secondary-50);
+    box-shadow: var(--box-shadow-gradual);
+  }
+
+  body.-light & {
+    background: var(--color--white);
+    border-color: var(--color--gray-05);
+  }
+
+  body.-light &:hover {
+    border-color: var(--color--primary-30);
+    box-shadow: var(--box-shadow-gradual);
+  }
+
+  & > div:first-child {
     width: 100%;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    border-radius: var(--border-radius--inner);
+
+    & > img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      opacity: 0.6;
+      transform-origin: center;
+      transform: scale3d(1.1, 1.1, 1);
+      transition: all ease-in-out 0.3s;
+    }
+  }
+
+  &:hover > div:first-child > img {
+    opacity: 1;
+    transform: scale3d(1.2, 1.2, 1);
   }
 
   & > .content {
-    padding: 1rem;
-
-    & > h2 {
-      color: antiquewhite;
-    }
-
-    & > p {
-      line-height: 130%;
-    }
+    padding: var(--padding);
   }
 }
 </style>
