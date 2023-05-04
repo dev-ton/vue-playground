@@ -4,6 +4,6 @@
   "compilerOptions": {
     "composite": true,
     "lib": ["es5", "es6", "dom", "dom.iterable"],
-    "types": ["node", "jsdom", "vite/client"]
+    "types": ["node", "jsdom", "vite/client", "jest"]
   }
 }

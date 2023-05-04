@@ -6,6 +6,11 @@ import postcssPresetEnv from 'postcss-preset-env'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [vue()],
+  test: {
+    globals: true,
+    setupFiles: 'setupTests.ts',
+    includeSource: ['src/**/*.{js,ts,vue}'],
+  },
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
