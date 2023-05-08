@@ -10,7 +10,8 @@ defineProps<{
   isDisabled?: boolean
 }>()
 </script>
-<script lang="ts">
+<!-- <script lang="ts">
+was throwing errors on build
 function add(...args: number[]) {
   return args.reduce((a, b) => a + b, 0)
 }
@@ -23,4 +24,4 @@ if (vitest) {
     expect(add(1, 2, 3)).toBe(6)
   })
 }
-</script>
+</script> -->

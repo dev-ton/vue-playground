@@ -23,6 +23,7 @@
     "@fortawesome/vue-fontawesome": "^3.0.3",
     "@inkline/inkline": "^3.2.2",
     "@rive-app/canvas": "^1.0.99",
+    "@sentry/vue": "^7.51.1",
     "@vueuse/core": "^9.13.0",
     "pinia": "^2.0.28",
     "pocketbase": "^0.12.0",
