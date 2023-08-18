@@ -8,6 +8,7 @@ module.exports = {
     '@vue/eslint-config-typescript',
     '@vue/eslint-config-prettier',
     'plugin:storybook/recommended',
+    'plugin:@typescript-eslint/recommended',
   ],
   overrides: [
     {

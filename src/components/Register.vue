@@ -41,9 +41,10 @@
 </template>
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useForm } from '@inkline/inkline/composition-api'
+// import { useForm } from '@inkline/inkline/composition-api'
 import { deepUnref } from 'vue-deepunref'
 import { createRecord } from '@/api/context'
+import { useForm } from '@inkline/inkline'
 
 // TODO: Vee-Validate seems to be better solution
 const schema = {

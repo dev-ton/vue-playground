@@ -55,55 +55,55 @@
     /*TODO: Add version for light theme*/
 }
 
-@include i-pagination() {
-    ----opacity--disabled: 0.2;
-}
+// @include i-pagination() {
+//     ----opacity--disabled: 0.2;
+// }
 
-@include i-button() {
-  ----opacity--disabled: 0.2;
-}
+// @include i-button() {
+//   ----opacity--disabled: 0.2;
+// }
 
-@include i-navbar() {
-  ----border-style: none;
-  ----border-radius: none;
-}
+// @include i-navbar() {
+//   ----border-style: none;
+//   ----border-radius: none;
+// }
 
-@include i-badge() {
-  ----border-top-left-radius: 0.25em;
-  ----border-top-right-radius: 0.25em;
-  ----border-bottom-left-radius: 0.25em;
-  ----border-bottom-right-radius: 0.25em;
-}
+// @include i-badge() {
+//   ----border-top-left-radius: 0.25em;
+//   ----border-top-right-radius: 0.25em;
+//   ----border-bottom-left-radius: 0.25em;
+//   ----border-bottom-right-radius: 0.25em;
+// }
 
-@include i-table() {
-  ----border-radius: var(--border-radius);
-  @include variant('light') {
-    ----border-color: var(--color--light-40);
-  }
-  @include variant('dark') {
-    ----border-color: var(--color--gray-75);
-  }
-}
+// @include i-table() {
+//   ----border-radius: var(--border-radius);
+//   @include variant('light') {
+//     ----border-color: var(--color--light-40);
+//   }
+//   @include variant('dark') {
+//     ----border-color: var(--color--gray-75);
+//   }
+// }
 
-@include i-card() {
-  @include variant('light') {
-    ----background: var(--color--white);
-    ----border-color: var(--color--gray-05);
-  }
-  @include variant('dark') {
-    // ----background: var(--color--gray-80);
-    ----border-color: var(--color--gray-75);
-    // ----header--background: var(--color--gray-70);
-    // ----footer--background: var(--color--gray-70);
-  }
-}
+// @include i-card() {
+//   @include variant('light') {
+//     ----background: var(--color--white);
+//     ----border-color: var(--color--gray-05);
+//   }
+//   @include variant('dark') {
+//     // ----background: var(--color--gray-80);
+//     ----border-color: var(--color--gray-75);
+//     // ----header--background: var(--color--gray-70);
+//     // ----footer--background: var(--color--gray-70);
+//   }
+// }
 
-@include i-tabs() {
-  ----border-radius: var(--border-radius)
-  @include variant('light') {
-    ----border-color: var(--color--light-40);
-  }
-  @include variant('dark') {
-    ----border-color: var(--color--dark-40);
-  }
-}
+// @include i-tabs() {
+//   ----border-radius: var(--border-radius)
+//   @include variant('light') {
+//     ----border-color: var(--color--light-40);
+//   }
+//   @include variant('dark') {
+//     ----border-color: var(--color--dark-40);
+//   }
+// }
